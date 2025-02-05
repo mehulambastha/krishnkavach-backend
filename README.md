@@ -18,11 +18,4 @@ Simply run the following command
 ```bash
 npm run dev
 ```
-
 ### FOr more information, go through the Dockerfile and the docker-compose.yaml file, and the scripts inside package.json
-```
-```
-```
-```
-```
-```
