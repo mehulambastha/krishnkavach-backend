@@ -37,7 +37,7 @@ app.use(errorMiddleware);
 const PORT = parseInt(process.env.PORT as string) || 3001
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('This is your KrishnKavach!')
 })
 
 app.listen(PORT, "0.0.0.0", () => {
