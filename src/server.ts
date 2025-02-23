@@ -8,7 +8,6 @@ import errorMiddleware from "./middleware/error.middleware";
 import logger from './utils/logger';
 
 const app = express()
-const prisma = new PrismaClient();
 
 app.use(cors());
 app.use(express.json());
@@ -35,12 +34,12 @@ app.use("/api/sensors", sensorRoutes);
 app.use(errorMiddleware);
 
 
-const PORT = process.env.PORT || 3001
+const PORT = parseInt(process.env.PORT as string) || 3001
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Example app listening on port ${PORT}`)
 })

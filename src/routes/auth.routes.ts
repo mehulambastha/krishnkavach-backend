@@ -1,13 +1,13 @@
 import express from "express";
-import { signup, verifyOTPController } from "../controllers/auth.controller";
 import { validatePhoneNumber } from "../utils/validation.util";
+import { AuthController } from "../controllers/auth.controller";
 
 const router = express.Router();
 
 // POST /api/auth/signup - Register a new user with a phone number
-router.post("/signup", signup);
+router.post("/signup", AuthController.signup);
 
-// POST /api/auth/verify-otp - Verify OTP and mark user as verified
-router.post("/verify-otp", verifyOTPController);
+// To be implemented
+// router.post("/login",)
 
 export default router;

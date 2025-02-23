@@ -37,7 +37,7 @@ model EmergencyContact {
 model SensorReading {
   id              Int     @id @default(autoincrement())
   lightSensor     Float?
-  pulseReading    Float?
+  breathReading    Float?
   heartbeatReading Float?
   decibelLevel    Float?
   gpsLatitude     Float?

@@ -1,28 +1,25 @@
 import { Request, Response } from "express";
-import { generateOTP, verifyOTP } from "../services/auth.service";
 import { validatePhoneNumber } from "../utils/validation.util";
+import { AuthService } from "../services/auth.service";
+import logger from "../utils/logger";
 
-export const signup = async (req: Request, res: Response) => {
-  const { phoneNumber } = req.body;
+export class AuthController {
+  static async signup(req: Request, res: Response) {
+    try {
+      const { phoneNumber } = req.body;
+      // Validate input
+      if (!validatePhoneNumber(phoneNumber)) {
+        res.status(400).json({ message: "Invalid phone number" });
+        return
+      }
 
-  // Validate input
-  if (!validatePhoneNumber(phoneNumber)) {
-    return res.status(400).json({ message: "Invalid phone number" });
+      const newUser = await AuthService.createProfileWithNumber(phoneNumber);
+
+      res.status(200).json({ user: newUser });
+    } catch (error) {
+      logger.error("Error creating profile:", error);
+      res.status(500).json({ error: "Error creating profile" });
+    }
   }
+}
 
-  // Generate OTP
-  const otp = await generateOTP(phoneNumber);
-  res.status(200).json({ message: "OTP sent", otp });
-};
-
-export const verifyOTPController = async (req: Request, res: Response) => {
-  const { phoneNumber, otp } = req.body;
-
-  // Verify OTP
-  const isVerified = await verifyOTP(phoneNumber, otp);
-  if (!isVerified) {
-    return res.status(400).json({ message: "Invalid OTP" });
-  }
-
-  res.status(200).json({ message: "OTP verified successfully" });
-};
