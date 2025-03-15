@@ -1,0 +1,31 @@
+{"level":"info","message":"Successfully connected to the database","timestamp":"2025-03-15 19:37:22"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-03-15 19:37:22"}
+{"level":"info","message":"Successfully connected to the database","timestamp":"2025-03-15 19:44:01"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-03-15 19:44:01"}
+{"level":"info","message":"Successfully connected to the database","timestamp":"2025-03-15 19:48:34"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-03-15 19:48:34"}
+{"level":"info","message":"Successfully connected to the database","timestamp":"2025-03-15 19:49:12"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-03-15 19:49:12"}
+{"level":"info","message":"Successfully connected to the database","timestamp":"2025-03-15 19:50:45"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-03-15 19:50:45"}
+{"level":"info","message":"Successfully connected to the database","timestamp":"2025-03-15 19:51:06"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-03-15 19:51:06"}
+{"level":"info","message":"Successfully connected to the database","timestamp":"2025-03-15 19:54:10"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-03-15 19:54:10"}
+{"level":"info","message":"Successfully connected to the database","timestamp":"2025-03-15 19:54:20"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-03-15 19:54:20"}
+{"level":"info","message":"Successfully connected to the database","timestamp":"2025-03-15 19:54:39"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-03-15 19:54:39"}
+{"level":"info","message":"Successfully connected to the database","timestamp":"2025-03-15 19:55:00"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-03-15 19:55:00"}
+{"level":"info","message":"Successfully connected to the database","timestamp":"2025-03-15 19:57:06"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-03-15 19:57:06"}
+{"level":"info","message":"Successfully connected to the database","timestamp":"2025-03-15 19:57:30"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-03-15 19:57:30"}
+{"level":"info","message":"Successfully connected to the database","timestamp":"2025-03-15 20:09:07"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-03-15 20:09:07"}
+{"clientVersion":"6.3.1","errorCode":"P1001","level":"error","message":"Failed to connect to the database: Can't reach database server at `postgres:5432`\n\nPlease make sure your database server is running at `postgres:5432`.","name":"PrismaClientInitializationError","stack":"PrismaClientInitializationError: Can't reach database server at `postgres:5432`\n\nPlease make sure your database server is running at `postgres:5432`.\n    at t (/app/node_modules/@prisma/client/runtime/library.js:112:2473)","timestamp":"2025-03-15 20:17:09"}
+{"level":"info","message":"Successfully connected to the database","timestamp":"2025-03-15 20:19:32"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-03-15 20:19:32"}
+{"level":"info","message":"Successfully connected to the database","timestamp":"2025-03-15 20:20:27"}
+{"level":"info","message":"Server is running on port 3001","timestamp":"2025-03-15 20:20:27"}

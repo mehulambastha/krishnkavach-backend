@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Test</title>
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+</head>
+<body>
+    <h1>WebSocket Test</h1>
+    <div id="status">Status: Disconnected</div>
+    <button onclick="sendTestData()">Send Test Data</button>
+    <div id="log"></div>
+
+    <script>
+        const socket = io('http://localhost:3001');
+        const statusDiv = document.getElementById('status');
+        const logDiv = document.getElementById('log');
+
+        function log(message) {
+            const div = document.createElement('div');
+            div.textContent = `${new Date().toISOString()} - ${message}`;
+            logDiv.prepend(div);
+        }
+
+        socket.on('connect', () => {
+            statusDiv.textContent = 'Status: Connected';
+            log('Connected to WebSocket server');
+        });
+
+        socket.on('disconnect', () => {
+            statusDiv.textContent = 'Status: Disconnected';
+            log('Disconnected from WebSocket server');
+        });
+
+        socket.on('error', (error) => {
+            log('Error: ' + error.message);
+        });
+
+        function sendTestData() {
+            const testData = {
+                lightSensor: Math.random() * 100,
+                breathReading: 70 + Math.random() * 30,
+                heartbeatReading: 60 + Math.random() * 40,
+                decibelLevel: 30 + Math.random() * 50,
+                gpsLatitude: 12.9716 + Math.random(),
+                gpsLongitude: 77.5946 + Math.random(),
+                deviceVelocity: Math.random() * 60
+            };
+            
+            socket.emit('sensor_data', testData);
+            log('Sent test data: ' + JSON.stringify(testData));
+        }
+    </script>
+</body>
+</html> 

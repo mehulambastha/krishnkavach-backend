@@ -6,6 +6,28 @@ import userRoutes from "./routes/user.routes";
 import sensorRoutes from "./routes/sensor.routes";
 import errorMiddleware from "./middleware/error.middleware";
 import logger from './utils/logger';
+import { WebSocketServer } from './websocket/socket.server';
+import { createServer } from 'http';
+
+
+const prisma = new PrismaClient({
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL || 'postgresql://postgres:postgres@postgres:5432/kavachdb'
+    }
+  }
+});
+
+// Function to test database connection
+async function connectDB() {
+  try {
+    await prisma.$connect();
+    logger.info('Successfully connected to the database');
+  } catch (error) {
+    logger.error('Failed to connect to the database:', error);
+    process.exit(1);
+  }
+}
 
 const app = express()
 
@@ -23,7 +45,8 @@ app.use((req, res, next) => {
   next();
 });
 
-
+const httpServer = createServer(app);
+const wsServer = new WebSocketServer(httpServer);
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -40,6 +63,12 @@ app.get('/', (req, res) => {
   res.send('This is your KrishnKavach!')
 })
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Example app listening on port ${PORT}`)
-})
+// Connect to database before starting the server
+connectDB().then(() => {
+  httpServer.listen(PORT, "0.0.0.0", () => {
+    logger.info(`Server is running on port ${PORT}`);
+  });
+}).catch((error) => {
+  logger.error('Server failed to start:', error);
+  process.exit(1);
+});
