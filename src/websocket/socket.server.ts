@@ -21,6 +21,9 @@ export class WebSocketServer {
       },
     });
 
+    this.setupRedisAdapter();
+    this.setupMiddleware();
+    this.setupEventHandlers()
     
   }
 
@@ -39,9 +42,10 @@ export class WebSocketServer {
 
   private setupMiddleware() {
     this.io.use(async (socket, next) => {
+      console.log("request received")
       try {
         const uid = socket.handshake.query.token;
-        const user = await prisma.user.findUnique({where: {id: parseInt(uid as string)}})
+        const user = await prisma.user.findUnique({where: {id: uid as string}})
 
         socket.data.user = user;
         next();

@@ -4,7 +4,7 @@ import { getUserFromRequest } from "../utils/auth.util";
 import logger from "../utils/logger";
 
 interface ProfileData {
-  id: number;
+  id: string;
   name?: string;
   onboardingStep: number;
   onboardingData: {
@@ -16,7 +16,7 @@ interface ProfileData {
 export class UserController {
   static async updateProfile(req: Request, res: Response) {
     try {
-      const userId = getUserFromRequest(req)?.id as number;
+      const userId = getUserFromRequest(req)?.id as string;
       const profileData: ProfileData = req.body;
       const onboardingStep = profileData.onboardingStep
       const onboardingData = profileData.onboardingData;
@@ -30,7 +30,7 @@ export class UserController {
 
   static async getUser(req: Request, res: Response) {
     try {
-      const userId = parseInt(req.params.id);
+      const userId = req.params.id as string;
       const user = await UserService.getUserDetails(userId);
 
       res.status(200).json({ user });

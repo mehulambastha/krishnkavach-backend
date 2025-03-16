@@ -4,10 +4,7 @@ WORKDIR /app
 
 # Copy package files and install dependencies
 COPY package.json package-lock.json ./
-RUN npm install --only=production
-
-# Install Prisma CLI for client generation
-RUN npm install --save-dev prisma
+RUN npm install
 
 # Copy the entire application
 COPY . .
@@ -22,20 +19,18 @@ RUN npm run build
 FROM node:20-alpine
 WORKDIR /app
 
-# Install netcat for health checks
-RUN apk add --no-cache netcat-openbsd
-
-# Copy built application and dependencies
+# Copy built application and dependencies from builder stage
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/prisma ./prisma
 
-# Copy and set up entrypoint
-COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+# Create startup script
+RUN echo '#!/bin/sh\n\
+  npx prisma migrate deploy\n\
+  npm run dev' > /app/start.sh && \
+  chmod +x /app/start.sh
 
 EXPOSE 3001
 
-ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["dev"]
+CMD ["/app/start.sh"]

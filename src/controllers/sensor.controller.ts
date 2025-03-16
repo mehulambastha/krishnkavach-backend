@@ -3,7 +3,7 @@ import { SensorService } from "../services/sensor.service";
 import { getUserFromRequest } from "../utils/auth.util";
 
 export const saveData = async (req: Request, res: Response) => {
-  const userId = getUserFromRequest(req)?.id as number;
+  const userId = getUserFromRequest(req)?.id as string;
   const sensorData = req.body;
 
   await SensorService.saveSensorData(userId, sensorData);

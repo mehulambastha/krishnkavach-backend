@@ -9,7 +9,7 @@ export class UserService {
     return await prisma.user.findMany();
   }
 
-  static async updateUserProfile(userId: number, onboardingStep: number, onboardingData: { [key: string]: string }) {
+  static async updateUserProfile(userId: string, onboardingStep: number, onboardingData: { [key: string]: string }) {
     const profileData = {
       onboardingStep: onboardingStep,
       onboardingData: onboardingData
@@ -25,7 +25,7 @@ export class UserService {
     });
   }
 
-  static async getUserDetails(userId: number) {
+  static async getUserDetails(userId: string) {
     return await prisma.user.findUnique({
       where: {
         id: userId

@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export class SensorService {
-  static async saveSensorData(userId: number, sensorData: any) {
+  static async saveSensorData(userId: string, sensorData: any) {
     return sensorData;
   }
 

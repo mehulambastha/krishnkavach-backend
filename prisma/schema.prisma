@@ -8,53 +8,53 @@ datasource db {
 }
 
 model User {
-  id                  Int                 @id @default(autoincrement())
-  phoneNumber         String              @unique
-  isOTPverified       Boolean             @default(false)
-  name                String?
-  age                 Int?
-  height              Float?
-  vehicleOwnership    Boolean?
-  vehicleType         String?
-  profilePhoto        String?
-  govtIdProof         String?
-  privacySettings     PrivacySettings?
-  emergencyContacts   EmergencyContact[]
-  sensorReadings      SensorReading[]
-  createdAt           DateTime            @default(now())
-  updatedAt           DateTime            @updatedAt
+  id                String             @id @default(uuid())
+  phoneNumber       String             @unique
+  isOTPverified     Boolean            @default(false)
+  name              String?
+  age               Int?
+  height            Float?
+  vehicleOwnership  Boolean?
+  vehicleType       String?
+  profilePhoto      String?
+  govtIdProof       String?
+  privacySettings   PrivacySettings?
+  emergencyContacts EmergencyContact[]
+  sensorReadings    SensorReading[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
 }
 
 model EmergencyContact {
-  id          Int     @id @default(autoincrement())
-  name        String
-  phoneNumber String
+  id           String @id @default(uuid())
+  name         String
+  phoneNumber  String
   relationship String
-  userId      Int
-  user        User    @relation(fields: [userId], references: [id])
+  userId       String
+  user         User   @relation(fields: [userId], references: [id])
 }
 
 model SensorReading {
-  id              Int     @id @default(autoincrement())
-  lightSensor     Float?
+  id               String   @id @default(uuid())
+  lightSensor      Float?
   breathReading    Float?
   heartbeatReading Float?
-  decibelLevel    Float?
-  gpsLatitude     Float?
-  gpsLongitude    Float?
-  deviceVelocity  Float?
-  userId          Int
-  user            User    @relation(fields: [userId], references: [id])
-  createdAt       DateTime @default(now())
+  decibelLevel     Float?
+  gpsLatitude      Float?
+  gpsLongitude     Float?
+  deviceVelocity   Float?
+  userId           String
+  user             User     @relation(fields: [userId], references: [id])
+  createdAt        DateTime @default(now())
 }
 
 model PrivacySettings {
-  id                      Int     @id @default(autoincrement())
-  locationSharing         Boolean @default(false)
-  dashboardAccess         Boolean @default(false)
-  alerts                  Boolean @default(false)
+  id                       Int     @id @default(autoincrement())
+  locationSharing          Boolean @default(false)
+  dashboardAccess          Boolean @default(false)
+  alerts                   Boolean @default(false)
   emergencyContactRequests Boolean @default(false)
-  appUpdates              Boolean @default(false)
-  userId                  Int     @unique
-  user                    User    @relation(fields: [userId], references: [id])
+  appUpdates               Boolean @default(false)
+  userId                   String  @unique
+  user                     User    @relation(fields: [userId], references: [id])
 }
