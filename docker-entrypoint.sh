@@ -13,6 +13,7 @@ wait_for_postgres() {
 # Initialize database
 init_database() {
     echo "Running database migrations..."
+    npx prisma generate
     npx prisma migrate deploy
     echo "Migrations completed successfully!"
 }

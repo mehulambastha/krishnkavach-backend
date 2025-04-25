@@ -4,7 +4,7 @@ WORKDIR /app
 
 # Copy package files and install dependencies
 COPY package.json package-lock.json ./
-RUN npm install --only=production
+RUN npm install
 
 # Install Prisma CLI for client generation
 RUN npm install --save-dev prisma
@@ -38,4 +38,4 @@ RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 EXPOSE 3001
 
 ENTRYPOINT ["docker-entrypoint.sh"]
-CMD ["dev"]
+CMD ["start"]

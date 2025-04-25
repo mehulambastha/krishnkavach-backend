@@ -12,7 +12,7 @@ export class AuthController {
         res.status(400).json({ message: "Invalid phone number" });
         return
       }
-
+      console.log("validated phone number. Trying to save now.")
       const newUser = await AuthService.createProfileWithNumber(phoneNumber);
 
       res.status(200).json({ user: newUser });

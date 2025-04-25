@@ -8,7 +8,10 @@ import errorMiddleware from "./middleware/error.middleware";
 import logger from './utils/logger';
 import { WebSocketServer } from './websocket/socket.server';
 import { createServer } from 'http';
-
+// Swagger imports
+import swaggerUi from 'swagger-ui-express';
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerOptions from './swagger';
 
 const prisma = new PrismaClient({
   datasources: {
@@ -34,6 +37,10 @@ const app = express()
 app.use(cors());
 app.use(express.json());
 
+// Swagger setup
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 // Log incoming requests
 app.use((req, res, next) => {
   logger.info({
@@ -47,6 +54,8 @@ app.use((req, res, next) => {
 
 const httpServer = createServer(app);
 const wsServer = new WebSocketServer(httpServer);
+
+//extra comment 
 
 // Routes
 app.use("/api/auth", authRoutes);
